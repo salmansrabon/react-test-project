@@ -1,27 +1,31 @@
-import React, { Component } from 'react'
-import { Table, Button, ButtonToolbar } from 'react-bootstrap'
+import React, { Component } from 'react';
+import { Table, Button, ButtonToolbar } from 'react-bootstrap';
 
 class Department extends Component {
   constructor(props) {
-    super(props)
-    this.state = { deps: [], error: null, isLoaded: false }
+    super(props);
+    this.state = { deps: [], error: null, isLoaded: false };
   }
+
   refreshList() {
     fetch('https://jsonplaceholder.typicode.com/todos')
-      .then(response => response.json())
+      .then((response) => response.json())
       .then(
-        result => this.setState({ deps: result, isLoaded: true }),
-        error => this.setState({ isLoaded: true, error })
-      )
+        (result) => this.setState({ deps: result, isLoaded: true }),
+        (error) => this.setState({ isLoaded: true, error })
+      );
   }
+
   componentDidMount() {
-    this.refreshList()
+    this.refreshList();
   }
+
   componentDidUpdate() {
-    console.log(this.state.deps)
+    console.log(this.state.deps);
   }
+
   render() {
-    const { error, isLoaded, deps } = this.state
+    const { error, isLoaded, deps } = this.state;
     return (
       <div className="mt-5 d-flex justify-content-left">
         <Table className="mt-4" striped bordered hover size="sm">
@@ -47,7 +51,7 @@ class Department extends Component {
                 <td></td>
               </tr>
             )}
-            {deps.map(dep => (
+            {deps.map((dep) => (
               <tr key={dep.id}>
                 <td>{dep.userId}</td>
                 <td>{dep.title}</td>
@@ -57,7 +61,8 @@ class Department extends Component {
           </tbody>
         </Table>
       </div>
-    )
+    );
   }
 }
-export default Department
+
+export default Department;
